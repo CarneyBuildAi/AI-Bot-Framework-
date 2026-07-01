@@ -1,33 +1,32 @@
-"""Tests for AI Bot Framework"""
+"""Test file for framework"""
 import unittest
+import sys
 import os
-from dotenv import load_dotenv
+
+# Add parent directory to path
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from main import AIBot
+
 
 class TestFrameworkConfiguration(unittest.TestCase):
     """Test framework configuration"""
-    
-    def setUp(self):
-        """Set up test fixtures"""
-        load_dotenv()
-    
-    def test_environment_variables(self):
-        """Test environment variables are accessible"""
-        bot_name = os.getenv('BOT_NAME', 'AI Bot')
-        self.assertIsNotNone(bot_name)
-        self.assertEqual(bot_name, 'AI Bot')
-    
-    def test_framework_initialization(self):
-        """Test framework can initialize"""
-        from main import AIBot
-        bot = AIBot()
-        self.assertIsNotNone(bot)
-    
+
     def test_bot_run(self):
-        """Test bot can run"""
-        from main import AIBot
+        """Test bot run"""
         bot = AIBot()
         result = bot.run()
         self.assertTrue(result)
+
+    def test_framework_initialization(self):
+        """Test framework initialization"""
+        bot = AIBot()
+        self.assertEqual(bot.name, "AI Bot")
+    
+    def test_placeholder(self):
+        """Placeholder test"""
+        assert 1 + 1 == 2
+
 
 if __name__ == '__main__':
     unittest.main()
